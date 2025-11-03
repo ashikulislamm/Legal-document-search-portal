@@ -18,15 +18,14 @@ A modern web application for searching and summarizing legal documents. Built wi
 Legal document search portal/
 ├── backend/
 │   ├── requirements.txt          # Python dependencies
-│   └── venv/
-│       ├── app.py                # FastAPI application
-│       └── docs/                 # Legal document files (.txt)
-│           ├── doc1.txt
-│           ├── doc2.txt
-│           ├── doc3.txt
-│           ├── doc4.txt
-│           ├── doc5.txt
-│           └── doc6.txt
+│   ├── app.py                    # FastAPI application (moved out of venv)
+│   └── docs/                     # Legal document files (.txt)
+│       ├── doc1.txt
+│       ├── doc2.txt
+│       ├── doc3.txt
+│       ├── doc4.txt
+│       ├── doc5.txt
+│       └── doc6.txt
 │
 └── frontend/
     ├── package.json              # Node.js dependencies
@@ -90,16 +89,16 @@ Before you begin, ensure you have the following installed:
    ```
 
 5. **Verify or create documents directory:**
-   Ensure that the `backend/venv/docs/` directory contains `.txt` files with legal document content. The application will automatically load all `.txt` files from this directory.
+   Ensure that the `backend/docs/` directory contains `.txt` files with legal document content. The application will automatically load all `.txt` files from this directory. If you still have documents in the old `backend/venv/docs/` location, the server will temporarily use them as a fallback.
 
    If the directory does not exist, create it:
    ```bash
-   # macOS/Linux
-   mkdir -p venv/docs
+   # macOS/Linux (run from backend/)
+   mkdir -p docs
    ```
    ```powershell
-   # Windows (PowerShell)
-   New-Item -ItemType Directory -Force .\venv\docs | Out-Null
+   # Windows (PowerShell, run from backend/)
+   New-Item -ItemType Directory -Force .\docs | Out-Null
    ```
 
 ### Frontend Setup
@@ -140,9 +139,8 @@ Before you begin, ensure you have the following installed:
    source venv/bin/activate
    ```
 
-2. **Navigate to the app directory and run:**
+2. **Run the server from backend root:**
    ```bash
-   cd venv
    uvicorn app:app --reload --host 0.0.0.0 --port 8000
    ```
 
